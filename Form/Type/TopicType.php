@@ -2,6 +2,7 @@
 
 namespace GS\StructureBundle\Form\Type;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -79,7 +80,7 @@ class TopicType extends AbstractType
                     'class' => 'GSStructureBundle:User',
                     'choice_label' => 'email',
                     'multiple' => true,
-                    'query_builder' => function (StructureBundle $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->orderBy('u.username', 'ASC');
                     },
@@ -93,7 +94,7 @@ class TopicType extends AbstractType
                     'class' => 'GSStructureBundle:User',
                     'choice_label' => 'email',
                     'multiple' => true,
-                    'query_builder' => function (StructureBundle $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('u')
                                 ->orderBy('u.username', 'ASC');
                     },

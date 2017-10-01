@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
-use Doctrine\ORM\StructureBundle;
+use Doctrine\ORM\EntityRepository;
 
 use GS\StructureBundle\Entity\PaymentItem;
 
@@ -20,7 +20,7 @@ class PaymentItemType extends AbstractType
                     'label' => 'Inscription',
                     'class' => 'GSStructureBundle:Registration',
                     'choice_label' => 'displayName',
-                    'query_builder' => function (StructureBundle $er) {
+                    'query_builder' => function (EntityRepository $er) {
                         return $er->createQueryBuilder('r')
                                 ->where('r.state = :state')
                                 ->orderBy('r.id', 'ASC')
