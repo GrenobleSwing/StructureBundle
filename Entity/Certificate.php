@@ -318,7 +318,7 @@ class Certificate
      */
     public function getFile()
     {
-        return $this->imageFile;
+        return $this->file;
     }
 
 }
