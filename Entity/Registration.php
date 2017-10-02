@@ -132,6 +132,12 @@ class Registration
     private $state = "SUBMITTED";
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $semester = false;
+
+    /**
      * To store the amount that as been paid for the registration.
      * It is useful when computing the balance since a registration can be paid
      * without any Discount but later with the addition of another Registration
@@ -525,5 +531,29 @@ class Registration
     public function getAcceptRules()
     {
         return $this->acceptRules;
+    }
+
+    /**
+     * Set semester
+     *
+     * @param boolean $semester
+     *
+     * @return Registration
+     */
+    public function setSemester($semester)
+    {
+        $this->semester = $semester;
+
+        return $this;
+    }
+
+    /**
+     * Get semester
+     *
+     * @return boolean
+     */
+    public function getSemester()
+    {
+        return $this->semester;
     }
 }

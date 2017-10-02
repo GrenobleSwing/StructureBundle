@@ -54,6 +54,10 @@ class RegistrationType extends AbstractType
 //                    'class' => 'GSStructureBundle:Registration',
 //                    'choice_label' => 'account.displayName',
 //                ))
+                ->add('semester', CheckboxType::class, array(
+                    'label' => "Inscription au semestre",
+                    'required' => false,
+                ))
                 ->add('acceptRules', CheckboxType::class, array(
                     'label' => "Je m'engage à respecter l'objet associatif, les " .
                         "statuts (http://www.grenobleswing.com/pour-les-membres/statuts/)" .

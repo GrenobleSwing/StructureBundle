@@ -48,14 +48,6 @@ class CertificateType extends AbstractType
                         'class' => 'js-select-single',
                     ),
                 ))
-                ->add('year', EntityType::class, array(
-                    'label' => 'Année',
-                    'class' => 'GSStructureBundle:Year',
-                    'choice_label' => 'title',
-                    'attr' => array(
-                        'class' => 'js-select-single',
-                    ),
-                ))
                 ->add('submit', SubmitType::class)
         ;
     }

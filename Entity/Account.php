@@ -109,18 +109,6 @@ class Account
     private $address;
 
     /**
-     * @ORM\Column(type="boolean")
-     * @Assert\Type("bool")
-     */
-    private $student = false;
-
-    /**
-     * @ORM\Column(type="boolean")
-     * @Assert\Type("bool")
-     */
-    private $unemployed = false;
-
-    /**
      * NOTE: This is not a mapped field of entity metadata, just a simple property.
      *
      * @Vich\UploadableField(mapping="account_image", fileNameProperty="imageName")
@@ -355,40 +343,6 @@ class Account
     }
 
     /**
-     * Set student
-     *
-     * @param boolean $student
-     *
-     * @return Account
-     */
-    public function setStudent($student)
-    {
-        $this->student = $student;
-
-        return $this;
-    }
-
-    /**
-     * Is student
-     *
-     * @return boolean
-     */
-    public function isStudent()
-    {
-        return $this->student;
-    }
-
-    /**
-     * Is member
-     *
-     * @return boolean
-     */
-    public function isMember()
-    {
-        return true;
-    }
-
-    /**
      * Get displayName
      *
      * @return float
@@ -490,40 +444,6 @@ class Account
     public function getImageFile()
     {
         return $this->imageFile;
-    }
-
-    /**
-     * Get student
-     *
-     * @return boolean
-     */
-    public function getStudent()
-    {
-        return $this->student;
-    }
-
-    /**
-     * Set unemployed
-     *
-     * @param boolean $unemployed
-     *
-     * @return Account
-     */
-    public function setUnemployed($unemployed)
-    {
-        $this->unemployed = $unemployed;
-
-        return $this;
-    }
-
-    /**
-     * Get unemployed
-     *
-     * @return boolean
-     */
-    public function getUnemployed()
-    {
-        return $this->unemployed;
     }
 
     /**
