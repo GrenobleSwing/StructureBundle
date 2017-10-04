@@ -11,53 +11,53 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Year
  *
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "self",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_get_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('view', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "edit",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_edit_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "remove",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_remove_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('delete', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "new_activity",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_new_year_activity",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted(['ROLE_ORGANIZER']))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "members",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_get_year_members",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted(['ROLE_SECRETARY']))"
  *     )
  * )

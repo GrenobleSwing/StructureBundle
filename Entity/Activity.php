@@ -14,63 +14,63 @@ use Symfony\Component\Validator\Context\ExecutionContextInterface;
 /**
  * Activity
  *
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "self",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_get_activity",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('view', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "edit",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_edit_activity",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "remove",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_remove_activity",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('delete', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "new_topic",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_new_activity_topic",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "new_category",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_new_activity_category",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "new_discount",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_new_activity_discount",
  *         parameters = { "activity" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )

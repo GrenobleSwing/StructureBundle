@@ -13,23 +13,23 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Topic
  *
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "self",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_get_topic",
  *         parameters = { "topic" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('view', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "new_registration",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_new_topic_registration",
  *         parameters = { "topic" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted(['ROLE_USER']))"
  *     )
  * )

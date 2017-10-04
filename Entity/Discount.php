@@ -11,33 +11,33 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Discount
  *
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "self",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_get_discount",
  *         parameters = { "discount" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('view', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "edit",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_edit_discount",
  *         parameters = { "discount" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
  *     )
  * )
- * Hateoas\Relation(
+ * @Hateoas\Relation(
  *     "remove",
- *     href = Hateoas\Route(
+ *     href = @Hateoas\Route(
  *         "gsadmin_remove_discount",
  *         parameters = { "discount" = "expr(object.getId())" }
  *     ),
- *     exclusion = Hateoas\Exclusion(
+ *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('delete', object))"
  *     )
  * )
