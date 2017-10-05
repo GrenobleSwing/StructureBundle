@@ -15,7 +15,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "self",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_category",
+ *         "gs_api_get_category",
  *         parameters = { "category" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "edit",
  *     href = @Hateoas\Route(
- *         "gsadmin_edit_category",
+ *         "gs_api_edit_category",
  *         parameters = { "category" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -35,7 +35,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "remove",
  *     href = @Hateoas\Route(
- *         "gsadmin_remove_category",
+ *         "gs_api_remove_category",
  *         parameters = { "category" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(

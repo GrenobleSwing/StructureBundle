@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "self",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_year",
+ *         "gs_api_get_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "edit",
  *     href = @Hateoas\Route(
- *         "gsadmin_edit_year",
+ *         "gs_api_edit_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "remove",
  *     href = @Hateoas\Route(
- *         "gsadmin_remove_year",
+ *         "gs_api_remove_year",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -44,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "new_activity",
  *     href = @Hateoas\Route(
- *         "gsadmin_new_year_activity",
+ *         "gs_api_new_year_activity",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -54,7 +54,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "members",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_year_members",
+ *         "gs_api_get_year_members",
  *         parameters = { "year" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(

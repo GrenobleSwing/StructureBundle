@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Hateoas\Relation(
  *     "self",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_account",
+ *         "gs_api_get_account",
  *         parameters = { "account" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -30,21 +30,11 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * @Hateoas\Relation(
  *     "edit",
  *     href = @Hateoas\Route(
- *         "gsadmin_edit_account",
+ *         "gs_api_edit_account",
  *         parameters = { "account" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
  *         excludeIf = "expr(not is_granted('edit', object))"
- *     )
- * )
- * @Hateoas\Relation(
- *     "remove",
- *     href = @Hateoas\Route(
- *         "gsadmin_remove_account",
- *         parameters = { "account" = "expr(object.getId())" }
- *     ),
- *     exclusion = @Hateoas\Exclusion(
- *         excludeIf = "expr(not is_granted('delete', object))"
  *     )
  * )
  * @ORM\Entity

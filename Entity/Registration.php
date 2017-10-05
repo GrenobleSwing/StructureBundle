@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "self",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_registration",
+ *         "gs_api_get_registration",
  *         parameters = { "registration" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "cancel",
  *     href = @Hateoas\Route(
- *         "gsadmin_cancel_registration",
+ *         "gs_api_cancel_registration",
  *         parameters = { "id" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -36,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "edit",
  *     href = @Hateoas\Route(
- *         "gsadmin_edit_registration",
+ *         "gs_api_edit_registration",
  *         parameters = { "registration" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(

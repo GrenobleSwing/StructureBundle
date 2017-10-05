@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "self",
  *     href = @Hateoas\Route(
- *         "gsadmin_get_payment",
+ *         "gs_api_get_payment",
  *         parameters = { "payment" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "edit",
  *     href = @Hateoas\Route(
- *         "gsadmin_edit_payment",
+ *         "gs_api_edit_payment",
  *         parameters = { "payment" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
@@ -34,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @Hateoas\Relation(
  *     "remove",
  *     href = @Hateoas\Route(
- *         "gsadmin_remove_payment",
+ *         "gs_api_remove_payment",
  *         parameters = { "payment" = "expr(object.getId())" }
  *     ),
  *     exclusion = @Hateoas\Exclusion(
