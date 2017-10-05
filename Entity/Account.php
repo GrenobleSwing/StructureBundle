@@ -6,8 +6,10 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\Groups;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Misd\PhoneNumberBundle\Validator\Constraints\PhoneNumber as AssertPhoneNumber;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\HttpFoundation\File\File;
@@ -47,6 +49,7 @@ class Account
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @Groups({"payment"})
      */
     private $id;
 
@@ -56,6 +59,7 @@ class Account
      *     message = "The email '{{ value }}' is not a valid email.",
      *     checkMX = true
      * )
+     * @Groups({"payment"})
      */
     private $email;
 
@@ -66,6 +70,7 @@ class Account
      *      min = 2,
      *      max = 64
      * )
+     * @Groups({"payment"})
      */
     private $firstName = "";
 
@@ -76,6 +81,7 @@ class Account
      *      min = 2,
      *      max = 64
      * )
+     * @Groups({"payment"})
      */
     private $lastName = "";
 
@@ -336,6 +342,9 @@ class Account
      * Get displayName
      *
      * @return float
+     * @VirtualProperty
+     * @SerializedName("displayName")
+     * @Groups({"payment"})
      */
     public function getDisplayName()
     {

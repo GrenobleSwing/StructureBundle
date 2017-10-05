@@ -21,26 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  *         excludeIf = "expr(not is_granted('view', object))"
  *     )
  * )
- * @Hateoas\Relation(
- *     "edit",
- *     href = @Hateoas\Route(
- *         "gs_api_edit_payment",
- *         parameters = { "payment" = "expr(object.getId())" }
- *     ),
- *     exclusion = @Hateoas\Exclusion(
- *         excludeIf = "expr(not is_granted('edit', object))"
- *     )
- * )
- * @Hateoas\Relation(
- *     "remove",
- *     href = @Hateoas\Route(
- *         "gs_api_remove_payment",
- *         parameters = { "payment" = "expr(object.getId())" }
- *     ),
- *     exclusion = @Hateoas\Exclusion(
- *         excludeIf = "expr(not is_granted('delete', object))"
- *     )
- * )
  * @ORM\Entity(repositoryClass="GS\StructureBundle\Repository\PaymentRepository")
  */
 class Payment
@@ -107,7 +87,6 @@ class Payment
     /**
      * @ORM\ManyToOne(targetEntity="GS\StructureBundle\Entity\Account", inversedBy="payments")
      * @ORM\JoinColumn(nullable=false)
-     * @Type("Relation")
      */
     private $account;
 
