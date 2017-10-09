@@ -68,14 +68,14 @@ class PaymentItem
     }
 
 
-    private function getDiscountAmount($amount)
+    private function getDiscountAmount($amount, $coeff)
     {
         $discount = $this->getDiscount();
         if(null !== $discount) {
             if ($discount->getType() == 'percent') {
                 return $amount * $discount->getValue() / 100;
             } else {
-                return $discount->getValue();
+                return $coeff * $discount->getValue();
             }
         }
         return 0;
@@ -89,8 +89,13 @@ class PaymentItem
         $amount = $this->getRegistration()->getTopic()
                 ->getCategory()->getPrice();
 
+        $isSemester = $this->getRegistration()->getSemester();
+        $coeff = $isSemester ? 0.5 : 1.0;
+
+        $amount *= $coeff;
+
         // Apply the discount if needed
-        $amount -= $this->getDiscountAmount($amount);
+        $amount -= $this->getDiscountAmount($amount, $coeff);
 
         // Substract the amount already paid
         $amount -= $this->getRegistration()->getAmountPaid();

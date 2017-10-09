@@ -30,7 +30,7 @@ class TopicType extends AbstractType
                     'label' => 'Categories',
                     'class' => 'GSStructureBundle:Category',
                     'choice_label' => 'name',
-                    'position' => array('after' => 'activity'),
+                    'position' => array('before' => 'requiredTopics'),
                 ))
 //                A ameliorer pour ne prendre en compte que ceux de l'annee
                 ->add('requiredTopics', EntityType::class, array(
@@ -117,7 +117,7 @@ class TopicType extends AbstractType
                     'label' => 'Categories',
                     'class' => 'GSStructureBundle:Category',
                     'choice_label' => 'name',
-                    'position' => array('after' => 'activity'),
+                    'position' => array('before' => 'requiredTopics'),
                     'choices' => $topic->getActivity()->getCategories(),
                 ));
             }

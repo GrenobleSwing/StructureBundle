@@ -149,7 +149,7 @@ class Discount
     /**
      * Set value
      *
-     * @param string $value
+     * @param float $value
      *
      * @return Discount
      */
@@ -163,7 +163,7 @@ class Discount
     /**
      * Get value
      *
-     * @return string
+     * @return float
      */
     public function getValue()
     {
