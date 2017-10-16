@@ -4,7 +4,9 @@ namespace GS\StructureBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use JMS\Serializer\Annotation\SerializedName;
 use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\Validator\Constraints as Assert;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -199,6 +201,8 @@ class Certificate
     /**
      * Get display
      *
+     * @VirtualProperty
+     * @SerializedName("display")
      * @return string
      */
     public function getDisplay()

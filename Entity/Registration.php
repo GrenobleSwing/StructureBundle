@@ -329,18 +329,29 @@ class Registration
                 $this->getTopic()->getTitle();
     }
 
+    /**
+     * @return Registration
+     */
     public function wait()
     {
         $this->setState('WAITING');
         return $this;
     }
 
+    /**
+     * @return Registration
+     */
     public function validate()
     {
         $this->setState('VALIDATED');
         return $this;
     }
 
+    /**
+     * @param float $amount
+     *
+     * @return Registration
+     */
     public function pay($amount = null)
     {
         $this->setState('PAID');
@@ -352,8 +363,18 @@ class Registration
         return $this;
     }
 
+    /**
+     * @return Registration
+     */
     public function cancel()
     {
+        if (null !== $this->getPartnerRegistration()) {
+            $this->getPartnerRegistration()->setPartnerRegistration(null);
+            $this->getPartnerRegistration()->setWithPartner(false);
+            $this->setPartnerRegistration(null);
+            $this->setWithPartner(false);
+        }
+
         if ('PAID' == $this->getState()) {
             $this->setState('PARTIALLY_CANCELLED');
         } else {
