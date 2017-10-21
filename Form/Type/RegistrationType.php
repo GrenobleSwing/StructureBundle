@@ -74,6 +74,9 @@ class RegistrationType extends AbstractType
             $form = $event->getForm();
 
             if (null !== $registration && null !== $registration->getTopic()) {
+                if (!$registration->getTopic()->getActivity()->getAllowSemester()) {
+                    $form->remove('semester');
+                }
                 if ('couple' != $registration->getTopic()->getType()) {
                     $form->remove('role');
                     $form->remove('withPartner');

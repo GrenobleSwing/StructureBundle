@@ -121,6 +121,12 @@ class Activity
     private $membersOnly = false;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $allowSemester = false;
+
+    /**
      * @ORM\Column(type="array", nullable=true)
      */
     private $triggeredEmails;
@@ -484,6 +490,11 @@ class Activity
     {
         $this->membership = $membership;
 
+        // The membership is for the full year, cannot be for only a semester
+        if ($membership) {
+            $this->setAllowSemester(false);
+        }
+
         return $this;
     }
 
@@ -519,6 +530,30 @@ class Activity
     public function getMembersOnly()
     {
         return $this->membersOnly;
+    }
+
+    /**
+     * Set allowSemester
+     *
+     * @param boolean $allowSemester
+     *
+     * @return Activity
+     */
+    public function setAllowSemester($allowSemester)
+    {
+        $this->allowSemester = $allowSemester;
+
+        return $this;
+    }
+
+    /**
+     * Get allowSemester
+     *
+     * @return boolean
+     */
+    public function getAllowSemester()
+    {
+        return $this->allowSemester;
     }
 
     /**
