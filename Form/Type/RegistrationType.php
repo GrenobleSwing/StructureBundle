@@ -50,6 +50,7 @@ class RegistrationType extends AbstractType
                     'label' => 'Adresse email du partenaire',
                     'required' => false,
                 ))
+                # TODO: Display this field in case of edition by a moderator
 //                ->add('partnerRegistration', EntityType::class, array(
 //                    'class' => 'GSStructureBundle:Registration',
 //                    'choice_label' => 'account.displayName',

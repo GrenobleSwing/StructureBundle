@@ -40,11 +40,15 @@ class ActivityType extends AbstractType
                     'label' => "Reservé aux membres de l'association",
                     'required' => false,
                 ))
+                ->add('allowSemester', CheckboxType::class, array(
+                    'label' => "Autoriser l'inscription au semestre",
+                    'required' => false,
+                ))
+                # TODO: Filter the list of topics
                 ->add('membershipTopic', EntityType::class, array(
                     'label' => "Adhésion (obligatoire) associée a l'activité",
                     'class' => 'GSStructureBundle:Topic',
                     'choice_label' => 'title',
-                    'choices' => $options['membership_topics'],
                     'placeholder' => "Choissisez l'adhésion obligatoire",
                     'required' => false,
                     'attr' => array(
@@ -92,8 +96,6 @@ class ActivityType extends AbstractType
         $resolver->setDefaults(array(
             'data_class' => Activity::class,
         ));
-
-        $resolver->setRequired('membership_topics');
     }
 
 }

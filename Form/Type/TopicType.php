@@ -25,7 +25,6 @@ class TopicType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-                ->add('activity')
                 ->add('category', EntityType::class, array(
                     'label' => 'Categories',
                     'class' => 'GSStructureBundle:Category',
@@ -111,7 +110,6 @@ class TopicType extends AbstractType
             $form = $event->getForm();
 
             if (null !== $topic && null !== $topic->getActivity()) {
-                $this->disableField($form->get('activity'));
                 $form->remove('category');
                 $form->add('category', EntityType::class, array(
                     'label' => 'Categories',
@@ -122,16 +120,6 @@ class TopicType extends AbstractType
                 ));
             }
         });
-    }
-
-    private function disableField(FormInterface $field)
-    {
-        $parent = $field->getParent();
-        $options = $field->getConfig()->getOptions();
-        $name = $field->getName();
-        $type = get_class($field->getConfig()->getType()->getInnerType());
-        $parent->remove($name);
-        $parent->add($name, $type, array_merge($options, ['disabled' => true]));
     }
 
     public function configureOptions(OptionsResolver $resolver)

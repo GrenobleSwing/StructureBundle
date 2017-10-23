@@ -5,8 +5,9 @@ namespace GS\StructureBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Hateoas\Configuration\Annotation as Hateoas;
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -321,7 +322,9 @@ class Registration
     /**
      * Get displayName
      *
-     * @return float
+     * @VirtualProperty
+     * @SerializedName("displayName")
+     * @return string
      */
     public function getDisplayName()
     {
