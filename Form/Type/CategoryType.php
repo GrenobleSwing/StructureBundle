@@ -7,6 +7,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\Form\FormEvent;
 use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -32,6 +33,10 @@ class CategoryType extends AbstractType
                 ->add('price', MoneyType::class, array(
                     'label' => 'Prix',
                     'scale' => 2,
+                ))
+                ->add('canBeFreeTopicForTeachers', CheckboxType::class, array(
+                    'label' => "Peut être un cours gratuit pour les profs",
+                    'required' => false,
                 ))
                 ->add('discounts')
                 ->add('submit', SubmitType::class)

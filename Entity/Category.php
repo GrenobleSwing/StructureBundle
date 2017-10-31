@@ -69,6 +69,12 @@ class Category
     private $price;
 
     /**
+     * @ORM\Column(type="boolean")
+     * @Assert\Type("bool")
+     */
+    private $canBeFreeTopicForTeachers;
+
+    /**
      * @ORM\ManyToOne(targetEntity="GS\StructureBundle\Entity\Activity", inversedBy="categories")
      * @ORM\JoinColumn(nullable=false)
      * @SerializedName("activityId")
@@ -205,4 +211,29 @@ class Category
     {
         return $this->discounts;
     }
+
+    /**
+     * Set canBeFreeTopicForTeachers
+     *
+     * @param boolean $canBeFreeTopicForTeachers
+     *
+     * @return Registration
+     */
+    public function setCanBeFreeTopicForTeachers($canBeFreeTopicForTeachers)
+    {
+        $this->canBeFreeTopicForTeachers = $canBeFreeTopicForTeachers;
+
+        return $this;
+    }
+
+    /**
+     * Get canBeFreeTopicForTeachers
+     *
+     * @return boolean
+     */
+    public function getCanBeFreeTopicForTeachers()
+    {
+        return $this->canBeFreeTopicForTeachers;
+    }
+
 }

@@ -126,9 +126,10 @@ class Registration
      *     | cancel            | cancel            | cancel            | cancel
      *     |                   v                   |                   v
      *     |-----> "delete the registration" <-----|               cancelled
+     * Free state is for the free topic of teachers
      *
      * @ORM\Column(type="string", length=20)
-     * @Assert\Choice({"SUBMITTED", "WAITING", "VALIDATED", "PAID", "CANCELLED"})
+     * @Assert\Choice({"SUBMITTED", "WAITING", "VALIDATED", "PAID", "CANCELLED", "FREE"})
      */
     private $state = "SUBMITTED";
 
@@ -492,7 +493,7 @@ class Registration
     public function setPartnerRegistration(\GS\StructureBundle\Entity\Registration $partnerRegistration = null)
     {
         $this->partnerRegistration = $partnerRegistration;
-        if ($this !== $partnerRegistration->getPartnerRegistration()) {
+        if (null !== $partnerRegistration && $this !== $partnerRegistration->getPartnerRegistration()) {
             $partnerRegistration->setPartnerRegistration($this);
         }
 

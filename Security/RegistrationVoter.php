@@ -154,7 +154,8 @@ class RegistrationVoter extends Voter
 
     private function canWait(Registration $registration, User $user, TokenInterface $token)
     {
-        if ('SUBMITTED' != $registration->getState()) {
+        if ('SUBMITTED' != $registration->getState() &&
+                'VALIDATED' != $registration->getState()) {
             return false;
         }
 

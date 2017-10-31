@@ -178,4 +178,24 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function countFreeTopicsForAccountAndYear(Account $account, Year $year)
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->leftJoin('reg.topic', 'top')
+                ->leftJoin('top.category', 'cat')
+                ->leftJoin('top.activity', 'act')
+                ->where('act.year = :year')
+                ->andWhere('reg.account = :acc')
+                ->andWhere('cat.canBeFreeTopicForTeachers = :true')
+                ->andWhere('reg.state = :paid')
+                ->setParameter('true', true)
+                ->setParameter('acc', $account)
+                ->setParameter('year', $year)
+                ->setParameter('paid', 'PAID');
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
 }

@@ -109,6 +109,16 @@ class Year
     private $state = 'DRAFT';
 
     /**
+     * @ORM\Column(type="integer")
+     * @Assert\Type("integer")
+     * @Assert\Range(
+     *      min = 0,
+     *      max = 100
+     * )
+     */
+    private $numberOfFreeTopicPerTeacher;
+
+    /**
      * @ORM\OneToMany(targetEntity="GS\StructureBundle\Entity\Activity", mappedBy="year", cascade={"persist", "remove"})
      * @Type("Relation<Activity>")
      */
@@ -366,6 +376,30 @@ class Year
     public function getSociety()
     {
         return $this->society;
+    }
+
+    /**
+     * Set numberOfFreeTopicPerTeacher
+     *
+     * @param integer $numberOfFreeTopicPerTeacher
+     *
+     * @return Year
+     */
+    public function setNumberOfFreeTopicPerTeacher($numberOfFreeTopicPerTeacher)
+    {
+        $this->numberOfFreeTopicPerTeacher = $numberOfFreeTopicPerTeacher;
+
+        return $this;
+    }
+
+    /**
+     * Get numberOfFreeTopicPerTeacher
+     *
+     * @return integer
+     */
+    public function getNumberOfFreeTopicPerTeacher()
+    {
+        return $this->numberOfFreeTopicPerTeacher;
     }
 
     /**
