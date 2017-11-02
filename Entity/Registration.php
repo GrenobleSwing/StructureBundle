@@ -334,6 +334,18 @@ class Registration
     }
 
     /**
+     * Get displayAccountName
+     *
+     * @VirtualProperty
+     * @SerializedName("displayAccountName")
+     * @return string
+     */
+    public function getDisplayAccountName()
+    {
+        return $this->getAccount()->getDisplayName();
+    }
+
+    /**
      * @return Registration
      */
     public function wait()

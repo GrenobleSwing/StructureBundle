@@ -241,4 +241,19 @@ class Address
     {
         return $this->city;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isComplete()
+    {
+        if (empty($this->getStreet()) ||
+                empty($this->getZipCode()) ||
+                empty($this->getCity()) ||
+                empty($this->getCountry())) {
+            return false;
+        }
+        return true;
+    }
+
 }

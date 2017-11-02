@@ -465,4 +465,18 @@ class Account
 
         return $this;
     }
+
+    /**
+     * @return boolean
+     */
+    public function isProfileComplete()
+    {
+        if (empty($this->getFirstName()) ||
+                empty($this->getLastName()) ||
+                !$this->getAddress()->isComplete()) {
+            return false;
+        }
+        return true;
+    }
+
 }

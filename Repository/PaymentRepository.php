@@ -2,7 +2,7 @@
 
 namespace GS\StructureBundle\Repository;
 
-use GS\StructureBundle\Entity\User;
+use GS\StructureBundle\Entity\Account;
 
 /**
  * PaymentRepository
@@ -21,6 +21,19 @@ class PaymentRepository extends \Doctrine\ORM\EntityRepository
                 ->andWhere('p.state = :state')
                 ->setParameter('state', 'DRAFT')
                 ->setParameter('date', $date, \Doctrine\DBAL\Types\Type::DATETIME)
+                ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    public function findPaymentsForAccount(Account $account)
+    {
+        $qb = $this->createQueryBuilder('p');
+        $qb
+                ->where('p.account = :account')
+                ->andWhere('p.state != :state')
+                ->setParameter('state', 'DRAFT')
+                ->setParameter('account', $account)
                 ;
 
         return $qb->getQuery()->getResult();

@@ -6,8 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Hateoas\Configuration\Annotation as Hateoas;
 use JMS\Serializer\Annotation\Groups;
-use JMS\Serializer\Annotation\Type;
 use JMS\Serializer\Annotation\SerializedName;
+use JMS\Serializer\Annotation\Type;
+use JMS\Serializer\Annotation\VirtualProperty;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -535,6 +536,42 @@ class Topic
     public function getAutoValidation()
     {
         return $this->autoValidation;
+    }
+
+    /**
+     * @return boolean
+     */
+    public function isAdhesion()
+    {
+        return $this->getType() == 'adhesion';
+    }
+
+    /**
+     * Get displayName
+     *
+     * @VirtualProperty
+     * @SerializedName("displayName")
+     * @return string
+     */
+    public function getDisplayName()
+    {
+        $display = $this->getTitle();
+        if (count($this->getSchedules()) == 1) {
+            $schedule = $this->getSchedules()[0];
+            $display .= ' - ';
+            $display .= $schedule->getStartDate()->format('D') . ' de ';
+            $display .= $schedule->getStartTime()->format('H:i') . ' à ';
+            $display .= $schedule->getEndTime()->format('H:i');
+
+            if ($schedule->getVenue() !== null) {
+                $display .= ' - ' . $schedule->getVenue()->getName();
+            }
+
+            if (!empty($schedule->getTeachers())) {
+                $display .= ' (' . $schedule->getTeachers() . ')';
+            }
+        }
+        return $display;
     }
 
 }
