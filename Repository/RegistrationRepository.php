@@ -189,11 +189,11 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
                 ->where('act.year = :year')
                 ->andWhere('reg.account = :acc')
                 ->andWhere('cat.canBeFreeTopicForTeachers = :true')
-                ->andWhere('reg.state = :paid')
+                ->andWhere('reg.state = :free')
                 ->setParameter('true', true)
                 ->setParameter('acc', $account)
                 ->setParameter('year', $year)
-                ->setParameter('paid', 'PAID');
+                ->setParameter('free', 'FREE');
 
         return $qb->getQuery()->getSingleScalarResult();
     }
