@@ -24,7 +24,7 @@ class CategoryDiscountVoter extends Voter
     {
         $this->decisionManager = $decisionManager;
     }
-    
+
     protected function supports($attribute, $subject)
     {
         // if the attribute isn't one we support, return false
@@ -76,7 +76,7 @@ class CategoryDiscountVoter extends Voter
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
-        foreach ( $subject->getCategory()->getOwners() as $owner) {
+        foreach ( $subject->getActivity()->getOwners() as $owner) {
             if ($user === $owner) {
                 return true;
             }
@@ -89,7 +89,7 @@ class CategoryDiscountVoter extends Voter
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
-        foreach ( $subject->getCategory()->getOwners() as $owner) {
+        foreach ( $subject->getActivity()->getOwners() as $owner) {
             if ($user === $owner) {
                 return true;
             }
@@ -102,7 +102,7 @@ class CategoryDiscountVoter extends Voter
         if ($this->decisionManager->decide($token, array('ROLE_ADMIN'))) {
             return true;
         }
-        foreach ( $subject->getCategory()->getOwners() as $owner) {
+        foreach ( $subject->getActivity()->getOwners() as $owner) {
             if ($user === $owner) {
                 return true;
             }
