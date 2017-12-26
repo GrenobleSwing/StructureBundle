@@ -198,4 +198,19 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function getRegistrationsForYearAndState(Year $year, $state)
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->leftJoin('reg.topic', 'top')
+                ->leftJoin('top.category', 'cat')
+                ->leftJoin('top.activity', 'act')
+                ->where('act.year = :y')
+                ->andWhere('reg.state = :state')
+                ->setParameter('state', $state)
+                ->setParameter('y', $year);
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

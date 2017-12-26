@@ -217,4 +217,22 @@ class Discount
     {
         return $this->activity;
     }
+
+    /**
+     * Get amount
+     *
+     * @return float
+     */
+    public function getAmount($price)
+    {
+        if (!is_float($price)) {
+            return 0.0;
+        }
+
+        if($this->getType() == 'percent') {
+            return $price * $this->getValue() / 100.0;
+        } else {
+            return $this->getValue();
+        }
+    }
 }

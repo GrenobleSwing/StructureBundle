@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Payment
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="GS\StructureBundle\Repository\PaymentItemRepository")
  */
 class PaymentItem
 {
