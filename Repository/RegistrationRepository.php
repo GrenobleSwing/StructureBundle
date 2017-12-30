@@ -4,6 +4,7 @@ namespace GS\StructureBundle\Repository;
 
 use GS\StructureBundle\Entity\Account;
 use GS\StructureBundle\Entity\Activity;
+use GS\StructureBundle\Entity\Category;
 use GS\StructureBundle\Entity\Topic;
 use GS\StructureBundle\Entity\Year;
 
@@ -211,6 +212,104 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
                 ->setParameter('y', $year);
 
         return $qb->getQuery()->getResult();
+    }
+
+    public function countRegistrationsForTopicAndStateAndRole(Topic $topic, $state, $role = 'leader')
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->where('reg.state = :state')
+                ->andWhere('reg.topic = :topic')
+                ->andWhere('reg.role = :role')
+                ->setParameter('state', $state)
+                ->setParameter('topic', $topic)
+                ->setParameter('role', $role)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPaidOrValidatedRegistrationsForTopicAndRole(Topic $topic, $role = 'leader')
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->where('reg.topic = :topic')
+                ->andWhere('reg.role = :role')
+                ->andWhere($qb->expr()->orX(
+                    $qb->expr()->eq('reg.state', ':statev'),
+                    $qb->expr()->eq('reg.state', ':statep')
+                ))
+                ->setParameter('statev', 'VALIDATED')
+                ->setParameter('statep', 'PAID')
+                ->setParameter('topic', $topic)
+                ->setParameter('role', $role)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countWaitingOrSubmittedRegistrationsForTopicAndRole(Topic $topic, $role = 'leader')
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->where('reg.topic = :topic')
+                ->andWhere('reg.role = :role')
+                ->andWhere($qb->expr()->orX(
+                    $qb->expr()->eq('reg.state', ':statea'),
+                    $qb->expr()->eq('reg.state', ':stateb')
+                ))
+                ->setParameter('statea', 'SUBMITTED')
+                ->setParameter('stateb', 'WAITING')
+                ->setParameter('topic', $topic)
+                ->setParameter('role', $role)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countPaidOrValidatedRegistrationsForCategoryAndRole(Category $category, $role = 'leader')
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->leftJoin('reg.topic', 'top')
+                ->where('top.category = :category')
+                ->andWhere('reg.role = :role')
+                ->andWhere($qb->expr()->orX(
+                    $qb->expr()->eq('reg.state', ':statev'),
+                    $qb->expr()->eq('reg.state', ':statep')
+                ))
+                ->setParameter('statev', 'VALIDATED')
+                ->setParameter('statep', 'PAID')
+                ->setParameter('category', $category)
+                ->setParameter('role', $role)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    public function countWaitingOrSubmittedRegistrationsForCategoryAndRole(Category $category, $role = 'leader')
+    {
+        $qb = $this->createQueryBuilder('reg');
+        $qb
+                ->select('count(reg.id)')
+                ->leftJoin('reg.topic', 'top')
+                ->where('top.category = :category')
+                ->andWhere('reg.role = :role')
+                ->andWhere($qb->expr()->orX(
+                    $qb->expr()->eq('reg.state', ':statea'),
+                    $qb->expr()->eq('reg.state', ':stateb')
+                ))
+                ->setParameter('statea', 'SUBMITTED')
+                ->setParameter('stateb', 'WAITING')
+                ->setParameter('category', $category)
+                ->setParameter('role', $role)
+                ;
+
+        return $qb->getQuery()->getSingleScalarResult();
     }
 
 }
