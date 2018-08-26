@@ -44,16 +44,11 @@ class ActivityType extends AbstractType
                     'label' => "Autoriser l'inscription au semestre",
                     'required' => false,
                 ))
-                # TODO: Filter the list of topics
+                # Filter the list of topics using PRE_SET_DATA
+                # Not perfect since Year can be changed
+                # TODO: improve it
                 ->add('membershipTopic', EntityType::class, array(
-                    'label' => "Adhésion (obligatoire) associée a l'activité",
                     'class' => 'GSStructureBundle:Topic',
-                    'choice_label' => 'title',
-                    'placeholder' => "Choissisez l'adhésion obligatoire",
-                    'required' => false,
-                    'attr' => array(
-                        'class' => 'js-select-single',
-                    ),
                 ))
                 ->add('membership', ChoiceType::class, array(
                     'label' => 'Ensemble des adhésions possibles',
@@ -89,6 +84,27 @@ class ActivityType extends AbstractType
                 ->add('submit', SubmitType::class)
         ;
 
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+            $activity = $event->getData();
+            $form = $event->getForm();
+
+            if (null !== $activity && null !== $activity->getYear()) {
+                $year = $activity->getYear();
+                $form->remove('membershipTopic');
+                $form->add('membershipTopic', EntityType::class, array(
+                    'label' => "Adhésion (obligatoire) associée a l'activité",
+                    'class' => 'GSStructureBundle:Topic',
+                    'choice_label' => 'title',
+                    'placeholder' => "Choissisez l'adhésion obligatoire",
+                    'required' => false,
+                    'attr' => array(
+                        'class' => 'js-select-single',
+                    ),
+                    'position' => array('after' => 'allowSemester'),
+                    'choices' => $year->getMembershipTopics(),
+                ));
+            }
+        });
     }
 
     public function configureOptions(OptionsResolver $resolver)

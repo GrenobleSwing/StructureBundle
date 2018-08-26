@@ -87,6 +87,11 @@ class Society
     private $emailPaymentTemplate;
 
     /**
+     * @ORM\OneToOne(targetEntity="Lexik\Bundle\MailerBundle\Entity\Email", cascade={"persist", "remove"})
+     */
+    private $emailPaymentFailureTemplate;
+
+    /**
      * @ORM\OneToOne(targetEntity="GS\ETransactionBundle\Entity\Config", cascade={"persist", "remove"})
      */
     private $paymentConfig;
@@ -178,6 +183,61 @@ class Society
         }
 
         $this->setEmailPaymentTemplate($email);
+
+        $defaultBodyFailureFr = "";
+        $defaultBodyFailureFr .= "Bonjour {{ payment.account.firstName }} {{ payment.account.lastName }},<br>\n";
+        $defaultBodyFailureFr .= "Votre paiement en plusieurs fois de {{ payment.amount }}&euro;\n";
+        $defaultBodyFailureFr .= "pour le règlement des inscriptions suivantes a échoué :\n";
+        $defaultBodyFailureFr .= "{% import 'GSStructureBundle:PaymentItem:macros.html.twig' as macro %}\n";
+        $defaultBodyFailureFr .= "<ul>\n";
+        $defaultBodyFailureFr .= "    {% for item in payment.items %}\n";
+        $defaultBodyFailureFr .= "        <li>\n";
+        $defaultBodyFailureFr .= "            {{ macro.print(item) }}\n";
+        $defaultBodyFailureFr .= "        </li>\n";
+        $defaultBodyFailureFr .= "    {% endfor %}\n";
+        $defaultBodyFailureFr .= "</ul>\n";
+        $defaultBodyFailureFr .= "<br>";
+        $defaultBodyFailureFr .= "Il reste {{ childPayment.amount }}&euro; à régler.";
+        $defaultBodyFailureFr .= "<br>";
+        $defaultBodyFailureFr .= "Merci d'effectuer ce paiment ici : {{ button|raw }}";
+        $defaultBodyFailureFr .= "<br>";
+        $defaultBodyFailureFr .= "Cordialement,\n";
+        $defaultBodyFailureFr .= "<br>";
+        $defaultBodyFailureFr .= "Grenoble Swing\n";
+        $emailFailureTranslations = array(
+            array(
+                'locale' => 'fr',
+                'subject' => '[Grenoble Swing] Echec paiement en plusieurs fois',
+                'body' => $defaultBodyFailureFr,
+                'from_address' => 'info@grenobleswing.com',
+                'from_name' => 'Grenoble Swing',
+            ),
+            array(
+                'locale' => 'en',
+                'subject' => '[Grenoble Swing] Failure payment in multipe time',
+                'body' => 'Put your text here.',
+                'from_address' => 'info@grenobleswing.com',
+                'from_name' => 'Grenoble Swing',
+            ),
+        );
+
+        $emailFailure = new Email();
+        $emailFailure->setDescription('Template for payment failure emails');
+        $emailFailure->setReference(uniqid('template_payment_failure_'));
+        $emailFailure->setSpool(false);
+        $emailFailure->setLayout($layout);
+        $emailFailure->setUseFallbackLocale(true);
+        foreach ($emailFailureTranslations as $trans) {
+            $emailTranslation = new EmailTranslation();
+            $emailTranslation->setLang($trans['locale']);
+            $emailTranslation->setSubject($trans['subject']);
+            $emailTranslation->setBody($trans['body']);
+            $emailTranslation->setFromAddress($trans['from_address']);
+            $emailTranslation->setFromName($trans['from_name']);
+            $emailFailure->addTranslation($emailTranslation);
+        }
+
+        $this->setEmailPaymentFailureTemplate($emailFailure);
 
         $this->setPaymentConfig(new Config());
     }
@@ -418,6 +478,30 @@ class Society
     public function getEmailPaymentTemplate()
     {
         return $this->emailPaymentTemplate;
+    }
+
+    /**
+     * Set emailPaymentFailureTemplate
+     *
+     * @param \Lexik\Bundle\MailerBundle\Entity\Email $emailPaymentFailureTemplate
+     *
+     * @return Society
+     */
+    public function setEmailPaymentFailureTemplate(\Lexik\Bundle\MailerBundle\Entity\Email $emailPaymentFailureTemplate = null)
+    {
+        $this->emailPaymentFailureTemplate = $emailPaymentFailureTemplate;
+
+        return $this;
+    }
+
+    /**
+     * Get emailPaymentFailureTemplate
+     *
+     * @return \Lexik\Bundle\MailerBundle\Entity\Email
+     */
+    public function getEmailPaymentFailureTemplate()
+    {
+        return $this->emailPaymentFailureTemplate;
     }
 
     /**

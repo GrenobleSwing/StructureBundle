@@ -64,6 +64,12 @@ class Payment
      * @ORM\Column(type="float")
      * @Assert\Type("float")
      */
+    private $alreadyPaid = 0.0;
+
+    /**
+     * @ORM\Column(type="float")
+     * @Assert\Type("float")
+     */
     private $amount = 0.0;
 
     /**
@@ -90,12 +96,18 @@ class Payment
      */
     private $account;
 
+    /**
+     * @ORM\OneToOne(targetEntity="GS\StructureBundle\Entity\Payment", cascade={"persist", "remove"})
+     */
+    private $parent;
+
 
     public function __construct()
     {
         $this->items = new ArrayCollection();
         $this->date = new \DateTime();
         $this->ref = uniqid("", true);
+        $this->parent = null;
     }
 
     /**
@@ -382,4 +394,63 @@ class Payment
     {
         return $this->ref;
     }
+
+    /**
+     * Set alreadyPaid
+     *
+     * @param float $alreadyPaid
+     *
+     * @return Payment
+     */
+    public function setAlreadyPaid($alreadyPaid)
+    {
+        $this->alreadyPaid = $alreadyPaid;
+
+        return $this;
+    }
+
+    /**
+     * Get alreadyPaid
+     *
+     * @return float
+     */
+    public function getAlreadyPaid()
+    {
+        return $this->alreadyPaid;
+    }
+
+    /**
+     * Get remainingAmount
+     *
+     * @return float
+     */
+    public function getRemainingAmount()
+    {
+        return $this->amount - $this->alreadyPaid;
+    }
+
+    /**
+     * Get parent
+     *
+     * @return string
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * Set parent
+     *
+     * @param \ParentTime $parent
+     *
+     * @return Payment
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
 }

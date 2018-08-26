@@ -435,4 +435,34 @@ class Year
     {
         return $this->teachers;
     }
+
+    /**
+     * Close year
+     */
+    public function close()
+    {
+        $this->setState('CLOSE');
+        foreach ($this->getActivities() as $activity) {
+            $activity->close();
+        }
+    }
+
+    /**
+     * Get Membership Topics
+     *
+     * @return \GS\StructureBundle\Entity\Topic
+     */
+    public function getMembershipTopics ()
+    {
+        $topics = new ArrayCollection();
+        foreach ($this->getActivities() as $activity) {
+            if ($activity->getMembership() == true) {
+//                $topics = array_merge($topics, $activity->getTopics());
+                $topics = new ArrayCollection(
+                    array_merge($topics->toArray(), $activity->getTopics()->toArray())
+                );
+            }
+        }
+        return $topics;
+    }
 }

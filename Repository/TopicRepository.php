@@ -78,6 +78,8 @@ class TopicRepository extends \Doctrine\ORM\EntityRepository
         $qb = $this->createQueryBuilder('t');
         $qb
                 ->where('t.type <> :type')
+                ->andWhere('t.state = :open')
+                ->setParameter('open', 'OPEN')
                 ->setParameter('type', 'adhesion');
 
         if (null !== $year) {

@@ -695,4 +695,15 @@ class Activity
         return $this->emailTemplates;
     }
 
+    /**
+     * Close activity
+     */
+    public function close()
+    {
+        $this->setState('CLOSE');
+        foreach ($this->getTopics() as $topic) {
+            $topic->close();
+        }
+    }
+
 }

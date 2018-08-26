@@ -574,4 +574,11 @@ class Topic
         return $display;
     }
 
+    /**
+     * Close topic
+     */
+    public function close()
+    {
+        $this->setState('CLOSE');
+    }
 }

@@ -129,7 +129,7 @@ class Registration
      * Free state is for the free topic of teachers
      *
      * @ORM\Column(type="string", length=20)
-     * @Assert\Choice({"SUBMITTED", "WAITING", "VALIDATED", "PAID", "CANCELLED", "FREE"})
+     * @Assert\Choice({"SUBMITTED", "WAITING", "VALIDATED", "PAYMENT_IN_PROGRESS", "PAID", "CANCELLED", "FREE"})
      */
     private $state = "SUBMITTED";
 
