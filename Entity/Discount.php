@@ -75,7 +75,7 @@ class Discount
 
     /**
      * @ORM\Column(name="`condition`", type="string", length=200)
-     * @Assert\Choice({"member", "student", "2nd", "3rd", "4th", "5th"})
+     * @Assert\Choice({"member", "student", "unemployed", "2nd", "3rd", "4th", "5th"})
      */
     private $condition;
 

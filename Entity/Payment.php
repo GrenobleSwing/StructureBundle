@@ -51,7 +51,7 @@ class Payment
      *   - PAID
      *
      * @ORM\Column(type="string", length=6)
-     * @Assert\Choice({"DRAFT", "IN_PROGRESS", "PAID"})
+     * @Assert\Choice({"DRAFT", "IN_PRO", "PAID"})
      */
     private $state = 'DRAFT';
 
@@ -151,6 +151,13 @@ class Payment
                 $registration = $item->getRegistration();
                 if (null !== $registration) {
                     $registration->pay($item->getAmount());
+                }
+            }
+        } else if ('IN_PRO' == $this->getState()) {
+            foreach ($this->getItems() as $item) {
+                $registration = $item->getRegistration();
+                if (null !== $registration) {
+                    $registration->pay($item->getAmount(), "PAYMENT_IN_PROGRESS");
                 }
             }
         }

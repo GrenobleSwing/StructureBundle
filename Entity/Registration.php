@@ -368,9 +368,9 @@ class Registration
      *
      * @return Registration
      */
-    public function pay($amount = null)
+    public function pay($amount = null, $state = "PAID")
     {
-        $this->setState('PAID');
+        $this->setState($state);
         if (null === $amount) {
             $this->setAmountPaid($this->getTopic()->getCategory()->getPrice());
         } else {
