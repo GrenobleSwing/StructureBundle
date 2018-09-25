@@ -69,11 +69,13 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
                 ->andWhere('top.activity = :act')
                 ->andWhere($qb->expr()->orX(
                     $qb->expr()->eq('reg.state', ':statev'),
+                    $qb->expr()->eq('reg.state', ':stateip'),
                     $qb->expr()->eq('reg.state', ':statep')
                 ))
                 ->setParameter('acc', $account)
                 ->setParameter('act', $activity)
                 ->setParameter('statev', 'VALIDATED')
+                ->setParameter('stateip', 'PAYMENT_IN_PROGRESS')
                 ->setParameter('statep', 'PAID');
 
         return $qb->getQuery()->getResult();
@@ -239,9 +241,11 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
                 ->andWhere('reg.role = :role')
                 ->andWhere($qb->expr()->orX(
                     $qb->expr()->eq('reg.state', ':statev'),
+                    $qb->expr()->eq('reg.state', ':stateip'),
                     $qb->expr()->eq('reg.state', ':statep')
                 ))
                 ->setParameter('statev', 'VALIDATED')
+                ->setParameter('stateip', 'PAYMENT_IN_PROGRESS')
                 ->setParameter('statep', 'PAID')
                 ->setParameter('topic', $topic)
                 ->setParameter('role', $role)
@@ -280,9 +284,11 @@ class RegistrationRepository extends \Doctrine\ORM\EntityRepository
                 ->andWhere('reg.role = :role')
                 ->andWhere($qb->expr()->orX(
                     $qb->expr()->eq('reg.state', ':statev'),
+                    $qb->expr()->eq('reg.state', ':stateip'),
                     $qb->expr()->eq('reg.state', ':statep')
                 ))
                 ->setParameter('statev', 'VALIDATED')
+                ->setParameter('stateip', 'PAYMENT_IN_PROGRESS')
                 ->setParameter('statep', 'PAID')
                 ->setParameter('category', $category)
                 ->setParameter('role', $role)

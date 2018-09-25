@@ -153,7 +153,7 @@ class Payment
                     $registration->pay($item->getAmount());
                 }
             }
-        } else if ('IN_PRO' == $this->getState()) {
+        } elseif ('IN_PRO' == $this->getState()) {
             foreach ($this->getItems() as $item) {
                 $registration = $item->getRegistration();
                 if (null !== $registration) {
