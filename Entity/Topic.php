@@ -85,6 +85,12 @@ class Topic
     private $autoValidation = false;
 
     /**
+     * @ORM\Column(type="string", length=6)
+     * @Assert\Choice({"PARENT", "TRUE", "FALSE"})
+     */
+    private $allowSemester = "PARENT";
+
+    /**
      * @ORM\Column(type="array")
      */
     private $options;
@@ -581,4 +587,44 @@ class Topic
     {
         $this->setState('CLOSE');
     }
+
+    /**
+     * Set allowSemester
+     *
+     * @param string $allowSemester
+     *
+     * @return Topic
+     */
+    public function setAllowSemester($allowSemester)
+    {
+        $this->allowSemester = $allowSemester;
+
+        return $this;
+    }
+
+    /**
+     * Get allowSemester
+     *
+     * @return string
+     */
+    public function getAllowSemester()
+    {
+        return $this->allowSemester;
+    }
+
+    /**
+     * Is allowSemester
+     *
+     * @return boolean
+     */
+    public function isAllowSemester()
+    {
+        if ($this->allowSemester == 'PARENT') {
+            return $this->getActivity()->getAllowSemester();
+        } elseif ($this->allowSemester == 'TRUE') {
+            return true;
+        }
+        return false;
+    }
+
 }

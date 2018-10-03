@@ -56,6 +56,14 @@ class TopicType extends AbstractType
                         'Adhesion' => 'adhesion',
                     ),
                 ))
+                ->add('allowSemester', ChoiceType::class, array(
+                    'label' => "Autoriser l'inscription au semestre",
+                    'choices' => array(
+                        "Hériter de l'activité" => 'PARENT',
+                        'Oui' => 'TRUE',
+                        'Non' => 'FALSE',
+                    ),
+                ))
                 ->add('autoValidation', ChoiceType::class, array(
                     'label' => 'Validation automatique des inscriptions a ce topic ?',
                     'choices' => array(
